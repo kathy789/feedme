@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">feedme</string>
+    <string name="app_name">Feed Me</string>
+
+
+    <string name="recipeText">Recipe fragment</string>
+
+
+    <!--for recipe page -->
+    <string name="select_ingredients_msg">Please select ingredients first:</string>
+    <string name="next_step_arrow">move to next step</string>
+    <string name="next_step">Next Step:</string>
+    <string name="search_recipes"> Search Recipes</string>
+    <string name="back">Back</string>
+
+
 </resources>
+

@@ -1,0 +1,49 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.food.feedme.RecipeActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="8pt"
+        android:text="@string/select_ingredients_msg"
+        android:layout_marginBottom="30dp"/>
+
+    <ListView
+        android:id="@+id/unexpiredItems"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/page_margin"
+        android:paddingRight="@dimen/page_margin"
+        android:scrollbarStyle="outsideOverlay"
+        android:choiceMode="multipleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10.0sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/next_step_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/next_step"
+            android:textSize="12pt"
+            android:layout_toStartOf="@+id/search_recipes_button"
+            android:layout_centerHorizontal="true"/>
+
+        <Button
+            android:id="@+id/search_recipes_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_recipes"
+            android:paddingStart="30dp"
+            android:paddingEnd="@dimen/page_margin"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+</LinearLayout>

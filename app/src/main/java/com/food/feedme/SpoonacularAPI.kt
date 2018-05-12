@@ -1,6 +1,6 @@
 package com.food.feedme
 
-import android.app.Fragment
+import android.support.v4.app.Fragment
 import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
@@ -12,29 +12,6 @@ import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 
-/**
- * Created by yuanyuanji on 5/12/18.
- */
-package com.food.feedme.activities
-
-import android.app.Fragment
-import android.content.Context
-import android.os.AsyncTask
-import android.util.Log
-import android.widget.Toast
-
-import com.mashape.unirest.http.HttpResponse
-import com.mashape.unirest.http.JsonNode
-import com.mashape.unirest.http.Unirest
-
-import org.json.JSONArray
-import org.json.JSONObject
-
-import java.io.BufferedReader
-import java.io.DataOutputStream
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
-import java.net.URL
 
 class SpoonacularAPI {
 
@@ -47,13 +24,13 @@ class SpoonacularAPI {
     constructor(handleRecipesReturned: OnRecipesReturnedInterface) {
         this.handleRecipesReturned = handleRecipesReturned
         this.clickedRecipe = JSONObject()
-        this.context = (handleRecipesReturned as Fragment) as Context
+        //this.context = (handleRecipesReturned as Fragment) as Context
     }
 
     constructor(onRecipeDetailsInterface: OnRecipeDetailsInterface) {
         this.onRecipeDetailsInterface = onRecipeDetailsInterface
         this.clickedRecipe = JSONObject()
-        this.context = (onRecipeDetailsInterface as Fragment)as Context
+        //this.context = (onRecipeDetailsInterface as Fragment)as Context
     }
 
     @Throws(Exception::class)
@@ -80,7 +57,7 @@ class SpoonacularAPI {
                 var finalUrl: String
                 finalUrl = addQueryParams(startUrl, "ingredients", *ingredients)
                 finalUrl += '&'.toString()
-                finalUrl = addQueryParams(finalUrl, "number", "3")
+                finalUrl = addQueryParams(finalUrl, "number", "5")
                 println("urlStr:$finalUrl")
 
 
@@ -91,9 +68,12 @@ class SpoonacularAPI {
                 con.setRequestProperty("Content-Type", "application/json")
                 con.setRequestProperty("X-Mashape-Key", X_Mashape_Key)
                 con.setRequestProperty("X-Mashape-Host", X_Mashape_Host)
+                val response = con.inputStream.bufferedReader().use{ it.readText() }
 
+                /*
                 val `in` = BufferedReader(
                         InputStreamReader(con.inputStream))
+
                 var inputLine: String
                 val response = StringBuffer()
                 inputLine = `in`.readLine()
@@ -104,9 +84,10 @@ class SpoonacularAPI {
                     inputLine = `in`.readLine()
                 }
                 `in`.close()
-
-
                 return JSONArray(response.toString())
+                */
+
+                return JSONArray(response)
 
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -118,7 +99,7 @@ class SpoonacularAPI {
         override fun onPostExecute(recipes: JSONArray?) {
             if (recipes == null) {
                 Log.e(javaClass.name, " API call returned null object. One possible reason is network not enabled.")
-                Toast.makeText(context, "Please make sure your network enabled!", Toast.LENGTH_LONG).show()
+                //Toast.makeText(context, "Please make sure your network enabled!", Toast.LENGTH_LONG).show()
                 return
             }
             handleRecipesReturned?.onRecipesReturned(recipes)
@@ -167,7 +148,8 @@ class SpoonacularAPI {
                 con.setRequestProperty("Content-Type", "application/json")
                 con.setRequestProperty("X-Mashape-Key", X_Mashape_Key)
                 con.setRequestProperty("X-Mashape-Host", X_Mashape_Host)
-
+                val response = con.inputStream.bufferedReader().use{ it.readText() }
+                /*
                 val `in` = BufferedReader(
                         InputStreamReader(con.inputStream))
                 var inputLine: String
@@ -183,6 +165,9 @@ class SpoonacularAPI {
                 clickedRecipe = JSONObject(response.toString())
 
                 return clickedRecipe
+                */
+                return JSONObject(response)
+
             } catch (e: Exception) {
                 e.printStackTrace()
             }
